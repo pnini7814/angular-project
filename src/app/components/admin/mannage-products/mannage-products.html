@@ -1,0 +1,86 @@
+<div class="card">
+  <div class="flex justify-content-between mb-3 align-items-center">
+    <h2 class="m-0">Products Management</h2>
+    <p-button label="Add New Product" icon="pi pi-plus" (onClick)="openNew()"></p-button>
+  </div>
+
+  <p-table [value]="products" [responsiveLayout]="'scroll'" [loading]="productService.loading()">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+      <tr>
+        <td><img [src]="product.imageUrl" width="50" class="shadow-1 border-round" /></td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price | currency }}</td>
+        <td>{{ product.categoryName }}</td>
+        <td>
+            <i class="pi" [ngClass]="{'pi-check-circle text-green-500': product.isAvailable, 'pi-times-circle text-red-500': !product.isAvailable}"></i>
+        </td>
+        <td>
+          <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" (onClick)="editProduct(product)"></p-button>
+          <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger" (onClick)="deleteProduct(product.id)"></p-button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <p-dialog [(visible)]="productDialog" [header]="'Product Details'" [modal]="true" styleClass="p-fluid" [style]="{width: '450px'}">
+    <ng-template pTemplate="content">
+      <div class="field mb-3">
+        <label for="name" class="font-bold">Name</label>
+        <input type="text" pInputText id="name" [(ngModel)]="product.name" required />
+      </div>
+
+      <div class="field mb-3">
+        <label for="description" class="font-bold">Description</label>
+        <textarea id="description" pTextarea [(ngModel)]="product.description" rows="3"></textarea>
+      </div>
+
+      <div class="field mb-3">
+        <label for="category" class="font-bold">Category ID</label>
+        <p-inputNumber id="category" [(ngModel)]="product.categoryId" [showButtons]="true" [min]="1"></p-inputNumber>
+      </div>
+
+      <div class="formgrid grid">
+        <div class="field col mb-3">
+          <label for="price" class="font-bold">Price</label>
+          <p-inputNumber id="price" [(ngModel)]="product.price" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
+        </div>
+        <div class="field col mb-3 flex align-items-center mt-4">
+            <p-checkbox [(ngModel)]="product.isAvailable" [binary]="true" inputId="avail"></p-checkbox>
+            <label for="avail" class="ml-2">Available</label>
+        </div>
+      </div>
+
+      <div class="field mb-3">
+    <label class="font-bold">Product Image</label>
+    
+    <div class="flex justify-content-center mb-2" *ngIf="previewImage || product.imageUrl">
+        <img [src]="previewImage || product.imageUrl" class="w-10rem shadow-2 border-round" />
+    </div>
+
+    <p-fileUpload 
+        mode="basic" 
+        chooseLabel="Upload Image" 
+        accept="image/*" 
+        maxFileSize="1000000" 
+        (onSelect)="onFileSelected($event)"
+        styleClass="p-button-outlined w-full">
+    </p-fileUpload>
+</div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+      <p-button label="Cancel" icon="pi pi-times" [text]="true" (onClick)="hideDialog()"></p-button>
+      <p-button label="Save Product" icon="pi pi-check" (onClick)="saveProduct()"></p-button>
+    </ng-template>
+  </p-dialog>
+</div>

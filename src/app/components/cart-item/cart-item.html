@@ -1,0 +1,20 @@
+<div class="flex align-items-center p-3 gap-3 border-bottom-1 surface-border">
+      <img [src]="item.productImageUrl" [alt]="item.productName" class="w-4rem shadow-1 border-round" />
+      
+      <div class="flex-1">
+        <div class="font-bold text-lg">{{ item.productName }}</div>
+        <div class="text-600">{{ item.productPrice | currency }} each</div>
+      </div>
+
+      <div class="flex align-items-center gap-2">
+        <p-button icon="pi pi-minus" [rounded]="true" [text]="true" (onClick)="decrement.emit()"></p-button>
+        <span class="font-medium w-2rem text-center">{{ item.quantity }}</span>
+        <p-button icon="pi pi-plus" [rounded]="true" [text]="true" (onClick)="increment.emit()"></p-button>
+      </div>
+
+      <div class="font-bold text-xl ml-4 w-8rem text-right">
+        {{ (item.productPrice * item.quantity) | currency }}
+      </div>
+      
+      <p-button icon="pi pi-times" severity="danger" [text]="true" (onClick)="remove.emit()"></p-button>
+    </div>

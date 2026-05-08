@@ -1,0 +1,68 @@
+<p-toast></p-toast>
+
+<div class="flex justify-content-center align-items-center min-h-screen surface-ground p-4">
+    <div class="surface-card p-6 shadow-2 border-round-xl w-full md:w-30rem">
+        
+        <div class="text-center mb-5">
+            <h1 class="text-900 text-3xl font-bold mb-2">Create Account</h1>
+            <p class="text-600 m-0">Please fill in your details</p>
+        </div>
+
+        <div class="flex flex-column gap-4">
+            
+            <p-floatLabel>
+                <input pInputText id="email" type="email" class="w-full custom-input" 
+                       [(ngModel)]="newUser.email" name="email" #email="ngModel" required />
+                <label for="email">Email address</label>
+            </p-floatLabel>
+
+            <p-floatLabel>
+                <input pInputText id="fname" type="text" class="w-full custom-input" 
+                       [(ngModel)]="newUser.firstName" name="firstName" required />
+                <label for="fname">First name</label>
+            </p-floatLabel>
+
+            <p-floatLabel>
+                <input pInputText id="lname" type="text" class="w-full custom-input" 
+                       [(ngModel)]="newUser.lastName" name="lastName" required />
+                <label for="lname">Last name</label>
+            </p-floatLabel>
+
+            <p-floatLabel>
+                <input pInputText id="address" type="text" class="w-full custom-input" 
+                       [(ngModel)]="newUser.address" name="address" />
+                <label for="address">Address</label>
+            </p-floatLabel>
+
+            <p-floatLabel>
+                <p-inputMask 
+                    id="phone" 
+                    mask="(999) 999-9999" 
+                    [(ngModel)]="newUser.phoneNumber" 
+                    name="phoneNumber"
+                    styleClass="w-full custom-input">
+                </p-inputMask>
+                <label for="phone">Phone Number</label>
+            </p-floatLabel>
+
+            <p-floatLabel>
+                <p-password 
+                    id="password" 
+                    [(ngModel)]="newUser.password" 
+                    [toggleMask]="true" 
+                    [feedback]="true"
+                    styleClass="w-full" 
+                    inputStyleClass="w-full custom-input">
+                </p-password>
+                <label for="password">Password</label>
+            </p-floatLabel>
+
+            <p-button 
+                label="Register" 
+                styleClass="w-full p-3 border-round-xl font-bold mt-2"
+                [disabled]="!isFormValid()"
+                (onClick)="onSubmit()">
+            </p-button>
+        </div>
+    </div>
+</div>

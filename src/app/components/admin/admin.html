@@ -1,0 +1,40 @@
+<div class="card p-4">
+    <p-toolbar styleClass="mb-4 shadow-1 border-round">
+        <div class="p-toolbar-group-start">
+            <h1 class="text-2xl font-bold m-0 mr-4">Admin Dashboard</h1>
+            
+            <div class="flex gap-2 ml-4">
+                <p-button 
+                    label="Manage Products" 
+                    icon="pi pi-box" 
+                    routerLink="products" 
+                    routerLinkActive="p-button-primary"
+                    [outlined]="true"
+                    severity="secondary">
+                </p-button>
+
+                <p-button 
+                    label="Manage Orders" 
+                    icon="pi pi-shopping-cart" 
+                    routerLink="orders" 
+                    routerLinkActive="p-button-primary"
+                    [outlined]="true"
+                    severity="secondary">
+                </p-button>
+            </div>
+        </div>
+
+        <div class="p-toolbar-group-end">
+            <p-button 
+                label="Back to Store" 
+                icon="pi pi-arrow-left" 
+                [text]="true" 
+                routerLink="/home">
+            </p-button>
+        </div>
+    </p-toolbar>
+
+    <div class="surface-card p-4 shadow-2 border-round">
+        <router-outlet></router-outlet>
+    </div>
+</div>

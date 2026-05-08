@@ -1,0 +1,31 @@
+<div class="card p-4">
+      <h2 class="mb-4">Orders Management</h2>
+      
+      <p-table [value]="orders" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Order ID</th>
+            <th>Date</th>
+            <th>Total Sum</th>
+            <th>Status</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-order>
+          <tr>
+            <td>#{{ order.id }}</td>
+            <td>{{ order.orderDate | date:'short' }}</td>
+            <td>{{ order.orderSum | currency }}</td>
+            <td>
+              <p-select 
+                [options]="statusOptions" 
+                [(ngModel)]="order.status" 
+                optionLabel="label" 
+                optionValue="value"
+                (onChange)="onStatusChange(order)"
+                class="w-full">
+              </p-select>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>

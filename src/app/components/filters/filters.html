@@ -1,0 +1,27 @@
+<div class="category-dropdown-container">
+  <label *ngIf="showLabel()" for="categorySelect" class="dropdown-label">
+    {{ label() }} *
+  </label>
+  
+  <div class="select-wrapper">
+    <select
+      #categorySelect
+      id="categorySelect"
+      class="form-select"
+      [value]="selectedCategoryId() || ''"
+      (change)="onCategoryChange(categorySelect.value)"
+      [disabled]="loading() || isDisabled()"
+    >
+      <option value="">Select a category</option>
+      <option *ngFor="let cat of categories()" [value]="cat.id">
+        {{ cat.name }}
+      </option>
+    </select>
+    
+    <div *ngIf="loading()" class="loading-spinner"></div>
+  </div>
+  
+  <div *ngIf="error()" class="error-message">
+    {{ error() }}
+  </div>
+</div>

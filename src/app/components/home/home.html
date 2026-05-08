@@ -1,0 +1,60 @@
+<!-- Hero Section -->
+<section class="hero-section py-20 px-4 bg-white text-surface-900">
+  <div class="max-w-4xl mx-auto text-center">
+    <h1 class="text-5xl font-bold mb-4">Welcome to GlamBeauty</h1>
+    <p class="text-xl mb-8">Discover the finest makeup products for your perfect look. From bold lipsticks to flawless foundations, we have everything you need to enhance your natural beauty.</p>
+    <p-button label="Shop Now" icon="pi pi-shopping-bag" severity="secondary" size="large" (onClick)="navigateToProducts()"></p-button>
+  </div>
+</section>
+
+<!-- Categories Section -->
+<section class="categories-section py-16 px-4 bg-surface-50">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-3xl font-bold text-center mb-12 text-surface-900">Shop by Category</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div *ngFor="let category of categories" class="category-card cursor-pointer" (click)="navigateToProducts(category.name)">
+        <p-card class="h-full">
+          
+          <ng-template #title>{{category.name}}</ng-template>
+          <ng-template #footer>
+            <p-button label="Browse {{category.name}}" [outlined]="true" class="w-full"></p-button>
+          </ng-template>
+        </p-card>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Products Section -->
+<section class="featured-section py-16 px-4">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-3xl font-bold text-center mb-12 text-surface-900">Featured Products</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div *ngFor="let product of featuredProducts" class="product-card">
+        <p-card class="h-full">
+          <ng-template #header>
+            <img [src]="product.imageUrl" alt="{{product.name}}" class="w-full h-48 object-cover" />
+          </ng-template>
+          <ng-template #title>{{product.name}}</ng-template>
+          <ng-template #subtitle>{{product.categoryName}} - ${{product.price}}</ng-template>
+          <p class="text-sm text-surface-600 mb-4">{{product.description}}</p>
+          <ng-template #footer>
+            <div class="flex gap-2">
+              <p-button label="View Product" [outlined]="true" class="flex-1" (onClick)="viewProduct(product)"></p-button>
+              <p-button label="Add to Cart" severity="success" class="flex-1" [disabled]="!product.isAvailable"></p-button>
+            </div>
+          </ng-template>
+        </p-card>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="cta-section bg-surface-100 py-16 px-4">
+  <div class="max-w-4xl mx-auto text-center">
+    <h2 class="text-3xl font-bold mb-4 text-surface-900">Ready to Glow?</h2>
+    <p class="text-lg mb-8 text-surface-700">Explore our full collection of premium makeup products and find your perfect match.</p>
+    <p-button label="Explore All Products" icon="pi pi-arrow-right" size="large" (onClick)="navigateToProducts()"></p-button>
+  </div>
+</section>

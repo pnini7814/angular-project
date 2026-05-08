@@ -1,0 +1,23 @@
+<div class="card shadow-2">
+    <p-menubar [model]="items">
+        <ng-template #start>
+            <span class="text-xl font-bold px-3 text-primary">GlamBeauty</span>
+        </ng-template>
+
+        <ng-template #end>
+            <div class="flex align-items-center gap-3">
+                <i class="pi pi-search p-2 cursor-pointer"></i>
+                
+                @if (authService.isAdmin()) {
+                    <p-button 
+                        label="Admin Panel" 
+                        icon="pi pi-cog" 
+                        severity="help" 
+                        (onClick)="goToAdmin()"
+                        size="small">
+                    </p-button>
+                }
+            </div>
+        </ng-template>
+    </p-menubar>
+</div>

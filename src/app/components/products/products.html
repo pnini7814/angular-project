@@ -1,0 +1,98 @@
+<div class="card p-4">
+  <div class="filter-panel">
+    <div class="filter-group">
+      <label for="search">Search:</label>
+      <input
+        id="search"
+        type="text"
+        class="filter-input"
+        placeholder="Search by name..."
+        [(ngModel)]="searchText"
+      />
+    </div>
+
+    <div class="filter-group">
+      <app-filters
+        [selectedCategoryId]="selectedCategory"
+        (selectedCategoryIdChange)="selectedCategory = $event"
+        [showLabel]="true"
+        label="Category"
+      ></app-filters>
+    </div>
+
+    <div class="filter-group">
+      <label for="minPrice">Min Price:</label>
+      <input
+        id="minPrice"
+        type="number"
+        class="filter-input"
+        [(ngModel)]="minPrice"
+        min="0"
+      />
+    </div>
+
+    <div class="filter-group">
+      <label for="maxPrice">Max Price:</label>
+      <input
+        id="maxPrice"
+        type="number"
+        class="filter-input"
+        [(ngModel)]="maxPrice"
+        min="0"
+      />
+    </div>
+
+    <div class="filter-actions">
+      <button class="btn-apply" (click)="applyFilters()">Apply Filters</button>
+      <button class="btn-reset" (click)="resetFilters()">Reset</button>
+    </div>
+  </div>
+    <p-dataView #dv 
+        [value]="products()" 
+        [rows]="9" 
+        [paginator]="true" 
+        layout="grid"
+        [sortField]="sortField" 
+        [sortOrder]="sortOrder">
+        
+        <ng-template #header>
+            <div class="flex justify-content-between align-items-center">
+                <p-select 
+                    [options]="sortOptions" 
+                    placeholder="Sort By Price" 
+                    (onChange)="onSortChange($event)" 
+                    styleClass="mb-2 md:mb-0">
+                </p-select>
+                
+            </div>
+        </ng-template>
+
+        <ng-template #grid let-items>
+            <div class="grid grid-nogutter">
+                <div class="col-12 md:col-6 lg:col-4 p-3" *ngFor="let item of items">
+                    <app-product-card 
+                        [product]="item" 
+                        (viewProduct)="onViewProduct($event)" 
+                        (addToCart)="onAddToCart($event)">
+                    </app-product-card>
+                </div>
+            </div>
+        </ng-template>
+
+        <ng-template #loading>
+             <div class="grid grid-nogutter">
+                <div class="col-12 md:col-6 lg:col-4 p-3" *ngFor="let i of [1,2,3,4,5,6]">
+                    <div class="border-round border-1 surface-border p-4 surface-card">
+                        <p-skeleton width="100%" height="200px" styleClass="mb-3"></p-skeleton>
+                        <p-skeleton width="60%" height="1.5rem" styleClass="mb-2"></p-skeleton>
+                        <p-skeleton width="40%" height="1rem" styleClass="mb-4"></p-skeleton>
+                        <div class="flex justify-content-between">
+                            <p-skeleton width="45%" height="3rem"></p-skeleton>
+                            <p-skeleton width="45%" height="3rem"></p-skeleton>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-dataView>
+</div>

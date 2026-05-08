@@ -1,0 +1,47 @@
+<p-toast></p-toast>
+
+<div class="flex justify-content-center align-items-center p-4">
+    <div class="surface-card p-6 shadow-2 border-round-xl w-full md:w-30rem">
+        
+        <div class="text-center mb-5">
+            <h1 class="text-900 text-3xl font-bold mb-2">Welcome Back</h1>
+            <p class="text-600 m-0">Please enter your details to sign in.</p>
+        </div>
+
+        <div class="flex flex-column gap-4">
+            
+            <p-floatLabel>
+                <input 
+                    pInputText 
+                    id="login-email" 
+                    type="email" 
+                    class="w-full custom-input" 
+                    [(ngModel)]="loginData.email" />
+                <label for="login-email">Email address</label>
+            </p-floatLabel>
+
+            <p-floatLabel>
+                <p-password 
+                    id="login-password" 
+                    [(ngModel)]="loginData.password" 
+                    [toggleMask]="true" 
+                    [feedback]="false" 
+                    styleClass="w-full" 
+                    inputStyleClass="w-full custom-input">
+                </p-password>
+                <label for="login-password">Password</label>
+            </p-floatLabel>
+
+            <div class="flex align-items-center justify-content-end">
+                <a class="text-primary font-medium no-underline cursor-pointer">Forgot password?</a>
+            </div>
+
+            <p-button 
+                label="Login" 
+                styleClass="w-full p-3 border-round-xl font-bold"
+                (onClick)="onLogin()">
+            </p-button>
+
+        </div>
+    </div>
+</div>
